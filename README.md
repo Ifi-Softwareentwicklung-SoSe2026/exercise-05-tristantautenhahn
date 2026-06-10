@@ -141,41 +141,41 @@ Kevin ersetzt den folgenden Platzhalter mit einem LiaScript-kompatiblen PlantUML
 @startuml
 skinparam classAttributeIconSize 0
 
-class Gruppe {
+class Group {
     - name: String
-    - teams: List<Mannschaft>
-    + addTeam(team: Mannschaft): void
+    - teams: List<Team>
+    + addTeam(team: Team): void
 }
 
-class Mannschaft {
+class Team {
     - name: String
     + getName(): String
 }
 
-class Spiel {
+class Game {
     - id: String
-    - homeTeam: Mannschaft
-    - awayTeam: Mannschaft
+    - homeTeam: Team
+    - awayTeam: Team
     - dateTime: DateTime
     - result: String
-    - odds: List<Wettquote>
+    - odds: List<Odd>
     + setResult(result: String): void
     + addOdd(type: String, value: double): void
 }
 
-class Wettquote {
+class Odd {
     - type: String
     - value: double
 }
 
-class Benutzer {
+class User {
     - name: String
     - balance: double
     + updateBalance(amount: double): void
 }
 
-class Wette {
-    - user: Benutzer
+class Bet {
+    - user: User
     - type: String
     - oddValue: double
     - stake: double
@@ -184,19 +184,19 @@ class Wette {
 }
 
 class PersistenceManager {
-    + saveTournament(games: List<Spiel>, groups: List<Gruppe>): void
-    + loadTournament(): List<Spiel>
-    + saveBets(bets: List<Wette>): void
-    + loadBets(): List<Wette>
+    + saveTournament(games: List<Game>, groups: List<Group>): void
+    + loadTournament(): List<Game>
+    + saveBets(bets: List<Bet>): void
+    + loadBets(): List<Bet>
 }
 
-Gruppe "1" *-- "*" Mannschaft : enthält
-Spiel "*" o-- "2" Mannschaft : beteiligt
-Spiel "1" *-- "*" Wettquote : bietet
-Wette "*" o-- "1" Benutzer : platziert von
-Wette "*" o-- "1" Spiel : bezieht sich auf
+Group "1" *-- "*" Team : contains
+Game "*" o-- "2" Team : involves
+Game "1" *-- "*" Odd : offers
+Bet "*" o-- "1" User : placed by
+Bet "*" o-- "1" Game : refers to
 
-note right of PersistenceManager : Speicherung als JSON
+note right of PersistenceManager : Storage as JSON
 
 @enduml
 ```
