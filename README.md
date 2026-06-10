@@ -153,14 +153,15 @@ class Team {
 }
 
 class Game {
-    - id: String
+    - gameId: String
     - homeTeam: Team
     - awayTeam: Team
     - dateTime: DateTime
     - result: String
     - odds: List<Odd>
     + setResult(result: String): void
-    + addOdd(type: String, value: double): void
+    + setOdd(type: String, value: double): void
+    + getOdd(type: String): double
 }
 
 class Odd {
@@ -176,6 +177,7 @@ class User {
 
 class Bet {
     - user: User
+    - game: Game
     - type: String
     - oddValue: double
     - stake: double
@@ -188,15 +190,17 @@ class PersistenceManager {
     + loadTournament(): List<Game>
     + saveBets(bets: List<Bet>): void
     + loadBets(): List<Bet>
+    + saveUsers(users: List<User>): void
+    + loadUsers(): List<User>
 }
 
-Group "1" *-- "*" Team : contains
-Game "*" o-- "2" Team : involves
-Game "1" *-- "*" Odd : offers
-Bet "*" o-- "1" User : placed by
-Bet "*" o-- "1" Game : refers to
+Group "1" *-- "*" Team : enthält
+Game "*" o-- "2" Team : beteiligt
+Game "1" *-- "*" Odd : bietet
+Bet "*" o-- "1" User : platziert von
+Bet "*" o-- "1" Game : bezieht sich auf
 
-note right of PersistenceManager : Storage as JSON
+note right of PersistenceManager : Persistenz via JSON
 
 @enduml
 ```
