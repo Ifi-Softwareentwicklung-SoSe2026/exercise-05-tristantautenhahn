@@ -186,19 +186,23 @@ class Bet {
 }
 
 class PersistenceManager {
-    + saveAll(tournament: Tournament, users: List<User>, bets: List<Bet>): void
-    + loadAll(): TournamentData
+    + saveTournament(tournament: Tournament): void
+    + loadTournament(): Tournament
+    + saveBets(bets: List<Bet>): void
+    + loadBets(): List<Bet>
+    + saveUsers(users: List<User>): void
+    + loadUsers(): List<User>
 }
 
 Tournament "1" *-- "*" Group : verwaltet
 Tournament "1" *-- "*" Game : enthält
 Group "1" *-- "*" Team : enthält
-Game "*" o-- "2" Team : zwischen
+Game "*" o-- "2" Team : beteiligt
 Game "1" *-- "*" Odd : definiert
 Bet "*" o-- "1" User : platziert von
 Bet "*" o-- "1" Game : bezieht sich auf
 
-note right of Tournament : Zentrale Struktur der Gruppenphase
+note right of PersistenceManager : Speicherung erfolgt via JSON
 
 @enduml
 ```
