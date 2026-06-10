@@ -202,6 +202,10 @@ Game "1" *-- "*" Odd : definiert
 Bet "*" o-- "1" User : platziert von
 Bet "*" o-- "1" Game : bezieht sich auf
 
+PersistenceManager ..> Tournament : speichert/lädt
+PersistenceManager ..> Bet : speichert/lädt
+PersistenceManager ..> User : speichert/lädt
+
 note right of PersistenceManager : Speicherung erfolgt via JSON
 
 @enduml
