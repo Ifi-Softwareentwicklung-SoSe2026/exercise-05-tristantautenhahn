@@ -1,4 +1,6 @@
-namespace GamblingApp; 
+using System.Collections.Generic;
+
+namespace GamblingApp;
 
 public interface SpeichernAlsJSON
 {
