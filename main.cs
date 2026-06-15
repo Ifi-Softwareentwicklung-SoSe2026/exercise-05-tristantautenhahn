@@ -5,6 +5,8 @@ public class Tournament
     private List<Group> groups;
     private List<Game> games; 
 
+    private String name; 
+
 }
 
 public class Group
@@ -55,7 +57,12 @@ public class User
         Balance += amount;
     }
 }
-
+public class Main()
+{
+    public void new(){
+        
+    }
+}
 public class PersistenceManager
 {
 
@@ -77,7 +84,8 @@ public class PersistenceManager
 
     public void SaveTournament(Tournament tournament)
     {
-        // FIXME 
+        string filename = "tournament.json";
+        SpeichernAlsJSON(filename); 
     }
 
 
